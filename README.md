@@ -45,3 +45,25 @@ ReactDOM.render(
   - jsx: htmlFor
 - you can reference javascript in jsx
   - by using {your javascript}
+
+
+## Libraries
+ Some useful libraries to make our lives easier.
+
+### Styles 
+ - sementic UI(https://semantic-ui.com/)
+   - ton of css files for your elements
+
+### Data
+  - faker.js
+    ```
+	npm install --save faker
+	```
+	```javascript
+	import faker from 'faker'
+	<img alt="avatar" src={faker.image.avatar()}/>  //will give you a random image
+
+
+	```
+    - generate some fake data for just about anything you need
+
