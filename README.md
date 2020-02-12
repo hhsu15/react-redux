@@ -46,6 +46,14 @@ ReactDOM.render(
 - you can reference javascript in jsx
   - by using {your javascript}
 
+## React Component
+React component can be a function or a class.
+You can create a function like this
+```javascript
+const MyComponent = (props) => {... return {your jsx}}
+// you can also remove the parenthesis
+const MyComponent = props => {... return {your jsx}}
+```
 
 ## Libraries
  Some useful libraries to make our lives easier.
@@ -67,3 +75,39 @@ ReactDOM.render(
 	```
     - generate some fake data for just about anything you need
 
+
+## React state
+Use React State system. You will need class component to be able to use it. Don't get confused with state and props. You can only update your state using setState(). setState will cause the components to rerender.
+```javascript
+class App extends React.Component {
+	constructor(props) {
+		super(props) // init the React.Component init
+		this.state = {} // this is your state
+	
+	}
+}
+	render(){
+		return "your jsx here"
+	}
+```
+
+## Lifecycle methods
+Functions that get called in the following order:
+1. constructor
+	- intialize your state
+2. render
+	- return jsx
+	- content visiable in screen
+3. componentDidMonut
+	- sit and wait for updates
+	- normally is used when the data is first loaded, like get current position only one time. Best pratice is to use componentDidMount to do initial data loading, as oppose to say, using constructor.
+4. componentDidUpdate
+	- sit and wait until this component is no longer shown
+	- normally is used when data is rerendered, for example, everytime user takes an action and state is updated we want to call some api.
+5. componentWillUnmount
+	- good place to do clean up (especially for non-react stuff) 
+
+- There are also other lifecyle methods rarely used:
+	- shouldComponentUpdate
+	- getDerivedStateFromProps
+	- getSnapshotBeforeUpdate
