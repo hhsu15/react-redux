@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay'
+import Loader from './Loader'
 
 // we need to use class component here because we need to use the state, basically waiting for the geolocation function to return and load the react component
 
@@ -44,7 +45,6 @@ class App extends React.Component {
 	// second arg is callback when it fails
 	window.navigator.geolocation.getCurrentPosition(
 		(position) => {
-			console.log(position)
 			this.setState({ lat: position.coords.latitude})},
 		(err) => {
 			console.log(err)
@@ -57,10 +57,24 @@ class App extends React.Component {
 		console.log('My component was just updated - it rerendered!')
 	}
 
+    renderContent(){
+		if (this.state.ereMsg && !this.state.lat){
+			return <div>Error: {this.state.errMsg}</div>
+		}	
+
+		if (!this.state.errMsg && this.state.lat) {
+			console.log("lat:", this.state.lat)
+			return <SeasonDisplay lat={this.state.lat}/>
+		}	
+
+		return <Loader message="Please accept request..."/>
+	}
 
 	render() {
-	return <SeasonDisplay lat={this.state.lat}/>
+		return <div>{this.renderContent()} </div>
 	}
+
+
 }
 
 ReactDOM.render(

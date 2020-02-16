@@ -54,6 +54,46 @@ const MyComponent = (props) => {... return {your jsx}}
 // you can also remove the parenthesis
 const MyComponent = props => {... return {your jsx}}
 ```
+A class based component loosk like this:
+```javascript
+
+class MyComponent extends React.Commponent {
+    
+	// you have a constructor for your state 
+   	constructor(props) {
+		super(props)
+		this.state = {}
+	}
+    
+	// you must use render function to return
+	render() {
+		return "jsx  here"
+	}
+}
+
+```
+
+### Childremn Component
+You can have a component that wraps other compoents. The components being wrapped are called children components. Good for making reusable components!
+```javescript
+const Segment = (props) => {
+	return <div className="ui placeholder segment">{props.children}</div>
+}
+
+// you can use this component to wrap other components
+const App = () => {
+	return (
+		<div>
+			<Segment>
+				<div className='ui icon header'>
+					Some conents here..
+				</div>
+			</Segment>
+		</div>
+	)
+}
+
+```
 
 ## Libraries
  Some useful libraries to make our lives easier.
@@ -77,19 +117,8 @@ const MyComponent = props => {... return {your jsx}}
 
 
 ## React state
-Use React State system. You will need class component to be able to use it. Don't get confused with state and props. You can only update your state using setState(). setState will cause the components to rerender.
-```javascript
-class App extends React.Component {
-	constructor(props) {
-		super(props) // init the React.Component init
-		this.state = {} // this is your state
-	
-	}
-}
-	render(){
-		return "your jsx here"
-	}
-```
+Use React State system. You will need class component to be able to use it. Don't get confused with state and props. You can only update your state using setState(). setState will cause the components and their children components to rerender.
+
 
 ## Lifecycle methods
 Functions that get called in the following order:
