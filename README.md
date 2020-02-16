@@ -75,7 +75,7 @@ class MyComponent extends React.Commponent {
 
 ### Childremn Component
 You can have a component that wraps other compoents. The components being wrapped are called children components. Good for making reusable components!
-```javescript
+```javascript
 const Segment = (props) => {
 	return <div className="ui placeholder segment">{props.children}</div>
 }
