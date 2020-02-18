@@ -21,3 +21,6 @@ function built into morden browsers
 ### To check the result on browser
 - Go to inspect -> Network, you will see the response 
 - Click on the response -> preview 
+
+## Grid system
+check out the css file for grid. Essentially we are trying to have a grid and allocate space for each image.
