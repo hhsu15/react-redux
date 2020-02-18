@@ -140,3 +140,56 @@ Functions that get called in the following order:
 	- shouldComponentUpdate
 	- getDerivedStateFromProps
 	- getSnapshotBeforeUpdate
+
+## Controled and Uncontroled component
+When the value can only be reached form the HTML element, it's considered "Uncontroled". For example in your input componenet, if you were to get the value of the user input by accessing the input value, this is uncontroled. We DO NOT want uncontroled.
+The "Controled" compoenet means that the react knows what the curtrent value is by assigning(overriding) the value to the input.
+In the example of `pics` `SearchBar` component, we do this thru onClick event, setting the state with the user input value, and then take that value to override the input `value` property. This way, we store the current value in side of the react state, instead of the dom.
+
+## Understand "this"
+Javascritp refences this as the object itself. The problem can rise when you assign a class method the expects a "this" but you do not have the "this". For example:
+```javascript
+class Car {
+	setSound(sound) {
+		this.sound = sound
+	}
+	drive() {
+		return this.sound
+	}
+}
+
+const car = new Car()
+car.setSound("vroom")
+car.drive() // this will return "this.sound"
+
+//however, this will fail
+const dirve = car.drive 
+drive() // you will get type error, since "this" is undefined
+
+/////Solutions//////
+// Solution 1
+class Car {
+	constructor() {
+		this.drive = this.drive.bind(this);  // binds this into the method so it will have access to "this" 
+	}
+
+	......
+
+}
+// Solution 2 (A newer version of javascript though)
+// In side of the class, use error function
+class Car {
+
+	setSound(sound){
+		this.sound = sound
+	}
+
+	// use arrow function, this will automatically take the instance as this
+	drive() => {
+		return this.sound
+	}
+}
+
+
+```
+- Rule of thumb, when you get a Type error that complains about `this`, try to console.log(this). You will see exactly what you get. Chances are you propabally see the `props` that you pass into the components, as opposed to the class component obj that you look for.
