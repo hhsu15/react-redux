@@ -1,0 +1,15 @@
+/*create a grid and put the images in the grid 
+the problem here is each image has a different size, here we set the row height to 150px which is making the images cut off. 
+To work around that, you set "grid-row-end" to vaule of "span 2" which will allocate two spans(two blocks) to a given image. We use the Ref to figure out the heights of each image and decide how many rows we want to allocate to each image!
+*/
+.image-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	grid-gap: 0 10px; /*gap between each row. this means no gap between each row which has height of 10px*/
+	grid-auto-rows: 10px; /*height of each row*/
+}
+
+.image-list img{
+	width: 250px;
+	grid-row-end: span 2;
+}

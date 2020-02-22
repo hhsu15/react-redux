@@ -193,3 +193,19 @@ class Car {
 
 ```
 - Rule of thumb, when you get a Type error that complains about `this`, try to console.log(this). You will see exactly what you get. Chances are you propabally see the `props` that you pass into the components, as opposed to the class component obj that you look for.
+
+## React Refs
+- Gives access to a single DOM element (where you would use querySelector in regular javascript)
+
+```javascript
+class SomeComp extends React.Component {
+	constructor(props){
+	super(props)
+
+	this.myRef = React.createRef();
+	}
+
+}
+
+```
+- We create refs in the constructor, assign them to instance variables, then pass to a particular JSX elements as props.
