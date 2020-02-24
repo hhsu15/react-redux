@@ -1,0 +1,11 @@
+/* make each item center aligned with cursor as pointer*/
+.video-item {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer;
+}
+
+/* make each image smaller */
+.video-item.item img {
+  max-width: 180px;
+}
