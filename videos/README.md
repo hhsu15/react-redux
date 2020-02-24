@@ -14,3 +14,17 @@ developers.google.com/youtube/v3/docs/search/list
 
 ## Network test
 On Browser -> Inspect -> NetWork -> XHR
+
+## iframe tag
+Use iframe tag to embed the video.
+<iframe src={url}/>
+
+## Semantic UI grid system
+Collections -> Grid
+- refer to the documentation, specifically
+```
+<div class='ui grid'>
+  <div className='four wide column'></div>
+  <div className='four wide column'></div>
+</div>
+```
