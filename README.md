@@ -1,4 +1,4 @@
-# react-redux
+# React
 
 ## Explain Babel
 Currently some browsers don't understand newer versions of Javascript like ES2016(aka ES6) and newer. In order to get around with this, Babel comes to rescue. Babel tekes new versions of JS and convert them into old version that can be executed in about any browser. You can go to babeljs.io to test out the conversion.
@@ -209,3 +209,110 @@ class SomeComp extends React.Component {
 
 ```
 - We create refs in the constructor, assign them to instance variables, then pass to a particular JSX elements as props.
+
+
+# Redux
+Redux is a state management tool. This is the basic redux cycle:
+- Action Creator
+- Action
+- dispatch
+- Reducers
+- State
+
+Use insurance company as an anology:
+- Customer (who takes the form to the insurance company) 
+- Form (can be a type of policy, or claim)
+- Receiver (the person who takes the form, makes copy and sends it to different departments, who also brings the data from the repository to the departments)
+- Departments (like Policy Department, Claim Department, Accounting Deaprtment that look at the form and decide they need to take action on it)
+- Compiled Department Data (A repository where the data for all the departments are stored so say, the management team can easily access)
+
+Now to map this to redux
+- Action Creator -> Customer (A functio that creates an action)
+- Action -> Form (A javascript obj that contains information)
+- dispatch -> Receiver (A function that sends the action to reducers)
+- Department -> Reducers (Functions that take the actions and decide whether to update the state)
+- Compiled department data -> state (A javascript obj that contains the data)
+
+```javascript
+
+//action creators
+const createPolicy  = (name, amount) => {
+  return { // action
+  type: 'CREATE_POLICY',
+    payload: {
+      name: name,
+      amount: amount
+    } 
+  }
+}
+
+const deletePolicy = (name) => {
+  return {
+    type: 'DELETE_POLICY',
+    payload: {
+      name: name,
+    }
+  }
+}
+
+const createClaim = (name, amountToCollect) => {
+  return {
+    type: 'CREATE_CLAIM',
+    payload: {
+      name: name,
+      amountToCollect: amountToCollect
+    }
+  }
+}
+
+
+// Reducers
+const claimsHistory = (oldListOfClaims=[], action) => {
+  if (action.type === 'CREATE_CLAIM') {
+    return [...oldListOfClaims, action.payload] // es6 syntax, create a new copy of oldListClaims and add action.payload to it
+  }
+  return oldListOfClaims;
+}
+
+const accounting = (bagOfMoney=100, action) => {
+  if (action.type === 'CREATE_CLAIM') {
+    return bagOfMoney - action.payload.amountToCollect 
+  } else if (action.type=== 'CREATE_POLICY') {
+    return bagOfMoney + action.payload.amount
+  }
+  return bagOfMoney;
+}
+
+const policies = (listOfPolicies=[], action) => {
+  if (action.type === 'CREATE_POLICY') {
+    return [...listOfPolicies, action.payload.name]
+  } else if (action.type === 'DELETE_POLICY') {
+    return listOfPolicies.filter(name => name !== action.payload.name)
+  }
+  return listOfPolicies;
+}
+
+const { createStore, combineReducers } = Redux
+const ourDepartments = combineReducers(
+  {accounting: accounting,
+   claimsHistory: claimsHistory,
+   policies: policies
+  }
+)
+
+const store = createStore(ourDepartments);
+
+//const action = createPolicy('Alex', 20);
+
+// this is the insurance company receiver who takes the form
+store.dispatch(createPolicy('Alex', 20))
+store.dispatch(createPolicy('Bob', 40))
+store.dispatch(createPolicy('Jen', 20))
+
+store.dispatch(createClaim('Bob', 100))
+
+store.dispatch(deletePolicy('Bob'))
+
+console.log(store.getState()) // you can see the data in the store
+
+```
