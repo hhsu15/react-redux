@@ -316,3 +316,93 @@ store.dispatch(deletePolicy('Bob'))
 console.log(store.getState()) // you can see the data in the store
 
 ```
+
+## React with Redux
+Refer to `song` for simple setup.
+
+### Call API 
+In genernal, we use `componentDidMount` to call Action Creator which is responsible for calling the API. This is a common practice we will see.
+
+- we will be using redux thunk as middlemare for this purpose. Refer to `blog` for example code.
+
+
+#### Error regarding the "Actions must be plain objects. Use custom middleware for async actions"
+- When we use the aysnc await code, after it gets compiled to js2015 it is not just a simple object. More details here...but under the hood it first returns a Requestobject which is why the error. 
+- Second issue is time it takes you get response from the API. If you don't use async wait, you just get back a promise which might not yet be resolved. This process of action creater is called -> action returned -> action sent to reducers -.> reducers run is extremly fast.
+
+### Syncronus action creator V.S. Asyncronous action creator
+By definition, async action creator takes some amout of time for it to get its data ready to go. When you use asyncronus action creator you will need some middleware.
+
+- a middleware in the world of redux: 
+  - fucntion that gets called with every action we dispatch
+  - has the ability to stop, modify or mess around with actions
+  - tons of open source middleware exists
+  - we are going to use one called "Redux-Thunk" to solve the async issue
+
+### Redux Thunk
+Rudux Thunk only does this:
+- Redux Thunk allows action creators to return:
+  - action objects or;
+  - functions!
+
+If action object is returned it has to have "type" property. "payload" is optional.
+
+This is how redux thunk works:
+
+Action creator -> action dispatch -> redux thunk -> 
+   -> is js object -> yes -> reducers
+   -> is a function -> yes -> function invoked with "dispatch" and "getState" functions (recall from the plain redux code) -> wait for request to finish -> dispatch the action mannually -> send back to action dispatch -> this time it goes to reducers
+
+## Rules of Redux
+- reducers cannot return "undefined". (null is fine)
+- produces 'state' or data to be used inside of your app using only previous state and action
+```javascript
+// default "null" for initialzation of reducer
+const myReducer = (state=null, action) => {
+  if (xxx) {return action.payload}
+  
+  return previousState  
+}
+
+```
+- must not return "reach out itself" to devide what value to return (reducers are pure)
+```javascript
+export default (state, action) => {
+  //bad 
+  return document.querySelector("#input")
+
+  //bad
+  return axios.get('/..')
+
+  //good
+  return state + action //some derivation of state or action is good
+}
+
+```
+- must not mutate the "state" argument
+  - if you look at the source code you will see because it checks `hasChanged` using old state === new state. In javascript, if you compare the object or array it will return true if they are the same object(stored in the same memory location). 
+  - we just return a new object.
+```javascript
+//ways to create a new instance without mutating the obj
+
+// to add
+const colors = ['red']
+const new_colors = [...colors, 'green']
+const new_colors2 = [...colors, 'green', 'red']
+const new_colors3 = ['green', ...colors]
+
+// to filter
+colors.filter(color=>color !== 'red')
+
+// obj
+const profile = {name: 'Sam'}
+const new_profile = {...profile, age:30}
+
+// to remove key from obj
+// use lodash. use the "_" 
+const new_profile = _.omit(profile, 'name') 
+
+
+
+
+```
