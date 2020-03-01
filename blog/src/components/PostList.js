@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchPost } from "../actions";
+import { fetchPostsAndUsers } from "../actions";
 
 import UserHeader from "./UserHeader";
 
@@ -8,11 +8,12 @@ class PostList extends React.Component {
   componentDidMount() {
     // call the action creator from componentDidMount to fetch data.
     // by calling this action creator, we dispatch to reducers thru the middleware and eventually reach to reducer will update the state
-    this.props.fetchPost();
+    //this.props.fetchPost();
+    this.props.fetchPostsAndUsers();
   }
 
   renderList() {
-    console.log(this.props.posts)
+    console.log(this.props.posts);
     return this.props.posts.map(post => {
       return (
         <div className="item" key={post.id}>
@@ -40,4 +41,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchPost })(PostList);
+export default connect(mapStateToProps, { fetchPostsAndUsers })(PostList);
