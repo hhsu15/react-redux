@@ -402,7 +402,75 @@ const new_profile = {...profile, age:30}
 // use lodash. use the "_" 
 const new_profile = _.omit(profile, 'name') 
 
+```
+
+## React Router
+Navigation for dom-based apps. Refer to `stream` app where we need to build a navigator for separate pages.
 
 
+### Installation
+Download react-router-dom (Not react-router!)
+```
+npm install --save react-router-dom
+```
+
+### Router path rule
+By design, the path rule checks if the extracted path string (e.g., "/page") `contains` the defined path and render every component that has the path contained in that extracted path string.
+
+For example, if you have `http://localhost:3000/page/5` and there are three compoents routed with path: 
+- path = "/"
+- path = "/page"
+- path = "/page/5"
+then, all of these 3 components will be displayed.
+
+To override this rule, you will use the keyword `exact`. 
+
+### Bad navigation
+Do not use <a /> tag to your app with href='/somePage'. 
+- your browser will make a request to the host server
+- then server sends with index.html fiel
+- thus all the data will be gone. 
+
+### Good navigation
+Use `Link` component from react-router-dom
+```
+<Link to='/pagetwo'>Go to page 2</Link>
 
 ```
+
+### Router types
+There are three types:
+- BrowserRouter
+  - we have seen this 
+- HashRouter
+  - add "#" in front of all the paths
+  - for example, "localhost:3000/#/page2"
+- MemoryRouter
+  - not showing the path on the browser bar at all
+
+
+### React Server
+A traditional server would not know how to handle an endpoint that is not defined -> you get 404 error.
+
+With react, it goes thru these special steps when a path(endpoint) is requested.
+- is the endpoint specified for the server?
+- if not, then check the dev resources -> check public dir
+- if not, then react will serve up the `index.html` file
+  - inside of which, it then finds the react router set up and does the magic
+
+That is why, with traditional server, since it's not set up this way you will get a 404 error when your project is deployed using Browser Router. You will have to configure the server set up to make it work.
+
+
+This is where the HashRouter comes into play. The server will esentially just render the index.html and not worry about the path. The path is just for the browser and the client. 
+
+
+## Redux Form
+
+### Redux-devtools-extension
+- download this extension to your browser to help debug redux form
+
+### debug session
+use the this query string:
+- localhost:3000/?debug_session=my_debug_session_1
+- this will allow you to remember all the state history even when the page is reloaded! You can change the session name and create other sessions as well!
+
