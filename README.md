@@ -474,3 +474,14 @@ use the this query string:
 - localhost:3000/?debug_session=my_debug_session_1
 - this will allow you to remember all the state history even when the page is reloaded! You can change the session name and create other sessions as well!
 
+
+## Reaux Form
+Library to handle form using redux. It has the reducers and actions built in so we do not have to create those.
+
+###Instalation
+```
+npm install --save redux-form
+```
+### Documentation
+Got to `redux-form.com` and check the examples for various form types.For example, check out the **Wizard Form**. It is going to be useful at some point. 
+
