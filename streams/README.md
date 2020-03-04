@@ -61,3 +61,10 @@ const auth = gapi.auth2.getAuthInstance()
 
 ```
 
+## JSON Server
+Refer to `api` folder. Essentially we have a file `db.json` to act like a database. We then use the command `json-server -p 3001 -w db.json` to watch any changes made to `db.json`. The purpose here is we are using it as database and we make an API request for (get, post, put, delete) to localhost:3001 to perform those operations.
+
+### Installation
+```
+npm install --save json-server
+```
