@@ -9,6 +9,23 @@
       "title": "other stream",
       "description": "here is some stream",
       "id": 2
+    },
+    {
+      "title": "efefee",
+      "description": "fefefe",
+      "id": 3
+    },
+    {
+      "title": "a new stream i created",
+      "description": "I did it",
+      "userId": "113447538763106079156",
+      "id": 4
+    },
+    {
+      "title": "a new stream i created",
+      "description": "I did it",
+      "userId": "113447538763106079156",
+      "id": 5
     }
   ]
 }
