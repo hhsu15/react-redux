@@ -463,6 +463,14 @@ That is why, with traditional server, since it's not set up this way you will ge
 
 This is where the HashRouter comes into play. The server will esentially just render the index.html and not worry about the path. The path is just for the browser and the client. 
 
+### History Object
+React Rounter internally creates a "history" object and uses it to pass down to the components it navigates. Since the BrowserRouter controls the history object it is hard for us to take control over it. The issue is if we want to go programatically navigate the user to a different page (as opposed to like user clicks on a button and go to a page), it will be difficult since we do not control the history. The way to handle this issue is we create our own "history" object. Refer to the `history.js`.
+
+### Path with variable
+Use ":" to indicate a variable. For example, `path='/streams/edit/:id'` to indicate that you no matter what you have after `/streams/edit/` it will always take you to the same link and show the variable on the browser bar. You will have access to the :id via the props under the key `match.params`
+
+### React Router Rule
+With React-Router, each Route component needs to be designed to work in isolation -> meaning it has to fetch its own data!! If a user goes directly to a certain page say "/streams/id/5" and you are relying on other componets to fecth a list of streams then user won't be able to see the record at all.
 
 ## Redux Form
 
