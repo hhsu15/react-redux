@@ -42,10 +42,12 @@ export const fetchStream = id => async dispatch => {
   dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
+// notice the difference between PUT and PATCH. PUT request replace the entire object while PATCH only replace the keys that you pass with values - other key values remain the same
 export const editStream = (id, formValues) => async dispatch => {
-  const response = await streams.put(`/streams/${id}`, formValues);
+  const response = await streams.patch(`/streams/${id}`, formValues);
 
   dispatch({ type: EDIT_STREAM, payload: response.data });
+  history.push("/")
 };
 
 export const deleteStream = id => async dispatch => {
