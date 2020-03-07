@@ -16,45 +16,9 @@
       "id": 3
     },
     {
-      "title": "a new stream i created",
-      "description": "I did it",
-      "userId": "113447538763106079156",
-      "id": 4
-    },
-    {
-      "title": "a new stream i created",
-      "description": "I did it",
-      "userId": "113447538763106079156",
-      "id": 5
-    },
-    {
-      "title": "test navigation",
-      "description": "I will be navigated to the homepage",
-      "userId": "113447538763106079156",
-      "id": 6
-    },
-    {
-      "title": "aaaa",
-      "description": "aaa",
-      "userId": "113447538763106079156",
-      "id": 7
-    },
-    {
-      "title": "vvvvvvv",
-      "description": "vvvvvv",
-      "userId": "113447538763106079156",
-      "id": 8
-    },
-    {
       "title": "has been edited",
       "description": "has been edited",
       "id": 9
-    },
-    {
-      "title": "patch has been done",
-      "description": " patched done",
-      "userId": "113447538763106079156",
-      "id": 10
     }
   ]
 }

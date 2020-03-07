@@ -493,3 +493,13 @@ npm install --save redux-form
 ### Documentation
 Got to `redux-form.com` and check the examples for various form types.For example, check out the **Wizard Form**. It is going to be useful at some point. 
 
+
+## Portals
+This is the issue Portals try to resolve:
+
+With React, evertything is rendered with the `#root`. If you want to inset a Modal compoent, which should behave certain ways like cover the whole screen (this is done with the `z-index` value, with higher z-index value, the element will show in the front, lower ones show in the background) however, you might have a very nested structure with "stacking context" which won't allow you to do that. With Portals, it will trick the system so rather than showing compoent like Modal from the `#root` div tag, it moves the element above that, normally within the <body> tag.
+
+- Refer to `Modal.js`. Essentially you create another id tag in additon to the `root` in the `public/index.js` file. You then have to use `ReactDOM.createPortal` and render the component with `querySelector('#myportal')`.
+
+### React Fragment
+When you render a component you normally have to return `<div>...</div>`. In the case you do not want to add this <div> layer you can use React Fragment. E.g., `<React.Fragment>...</React.Fragment>`. Check `StreamDelete.js` for example.
