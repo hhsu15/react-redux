@@ -547,3 +547,7 @@ With React, evertything is rendered with the `#root`. If you want to inset a Mod
 ### React Fragment
 
 When you render a component you normally have to return `<div>...</div>`. In the case you do not want to add this <div> layer you can use React Fragment. E.g., `<React.Fragment>...</React.Fragment>`. Check `StreamDelete.js` for example.
+
+
+## Context
+React context system that allows direct communication to the nested children components.
