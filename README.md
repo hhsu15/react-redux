@@ -548,6 +548,39 @@ With React, evertything is rendered with the `#root`. If you want to inset a Mod
 
 When you render a component you normally have to return `<div>...</div>`. In the case you do not want to add this <div> layer you can use React Fragment. E.g., `<React.Fragment>...</React.Fragment>`. Check `StreamDelete.js` for example.
 
-
 ## Context
+
 React context system that allows direct communication to the nested children components.
+
+### How it works
+
+- Refer to `translate`
+- Basically you create a Context component with a default value,
+- for the componet that needs the context, you use
+
+```
+static contexType = MyContexy
+```
+
+- then you can access the context value by using `this.context`
+- to update the value of the context, you use context provider:
+
+```
+<MyContext.Provider value="some new value">
+  <SomeComponent />
+</MyContext.Provider>
+```
+
+- notice, each Context.Provider has their own pipe (meaning they have thier own context value)
+
+### Consumer
+
+Altertively, to access data in the context, you can use Context.Consumer.
+
+- Rather than using `static contextType=MyContext`, you use <MyContext.Consumer> and inside of the wrapper you will invoke a function that will be provided with a `value` variable:
+
+```
+<MyContext.Consumer>
+  {(value)=> value === 'Egnlish' ? 'English': 'Not English'}
+</MyContext.Consumer>
+```
