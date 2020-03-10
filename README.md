@@ -562,7 +562,10 @@ React context system that allows direct communication to the nested children com
 static contexType = MyContexy
 ```
 
-- then you can access the context value by using `this.context`
+then you can access the context value by using `this.context`
+
+### Provider
+
 - to update the value of the context, you use context provider:
 
 ```
@@ -575,7 +578,7 @@ static contexType = MyContexy
 
 ### Consumer
 
-Altertively, to access data in the context, you can use Context.Consumer.
+Alternatively, to access data in the context, you can use Context.Consumer.
 
 - Rather than using `static contextType=MyContext`, you use <MyContext.Consumer> and inside of the wrapper you will invoke a function that will be provided with a `value` variable:
 
@@ -583,4 +586,35 @@ Altertively, to access data in the context, you can use Context.Consumer.
 <MyContext.Consumer>
   {(value)=> value === 'Egnlish' ? 'English': 'Not English'}
 </MyContext.Consumer>
+```
+
+## Hooks
+
+Hooks are for functional components to aquire the power of state and life cycle methods. But there is more to it. The real goal is to have reusable logics for the system when using function based components with hooks.
+
+### Hooks functions
+
+Refer to `simple_hooks` for example code.
+
+- useState: Allow functional component to use component level state
+- useEffect: allow "lifecyle methods"
+- useContext: allow context system
+- useRef: allow ref system
+- useRedux: allow storing data through a reducer
+
+#### useState
+```javascript
+[myState, setMyState] = useState('initialValue')
+setMyState("updatedValue")
+console.log(myState)  // "updatedValue" --> component rerender
+```
+
+### useEffect
+This is like componentDidMount & componentDidUpdate. The second argument will act like a detection to see if the value has changed from previously, if they are the same, function in the first argument will not be called. If you don't provide the second array argument, the function will always be called. If you pass an empty arrau, the function will only be called one time.
+```javascripy
+useEffect(
+  ()=>{callSomeFunction(someArg)},
+  [myState]
+)
+
 ```

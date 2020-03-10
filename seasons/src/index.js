@@ -1,83 +1,21 @@
-// @format
-import React from 'react';
-import ReactDOM from 'react-dom';
-import SeasonDisplay from './SeasonDisplay'
-import Loader from './Loader'
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import SeasonDisplay from "./SeasonDisplay";
+import Loader from "./Loader";
+import useLocation from "./useLocation";
 
-// we need to use class component here because we need to use the state, basically waiting for the geolocation function to return and load the react component
-
-
-/*
-// Function component would not work here
 const App = () => {
-	// Get user location, a built-in function for window
-	// first arg will be a callback function which gets called when userlocation is resolved,
-	// second arg is callback when it fails
-	window.navigator.geolocation.getCurrentPosition(
-		(position) => console.log(position),
-		(err) => console.log(err) // if user denies to share location then it calls this function
-	)
-	return <div>Hello</div>;
+  const [lat, errMessage] = useLocation();
+  let content;
+  if (errMessage) {
+    content = <div>Error: {errMessage}</div>;
+  } else if (lat) {
+    content = <SeasonDisplay lat={lat} />;
+  } else {
+    content = <Loader message="Please accept request..." />;
+  }
+
+  return <div className="border red">{content}</div>;
 };
 
-ReactDOM.render(
-	<App />, document.querySelector('#root')
-);
-*/
-
-class App extends React.Component {
-   /*
-	constructor(props) {
-		super(props);
-		this.state = {
-			lat: null,
-			errMsg: null
-		};
-	}
-	*/
-	//this is same as above constructor:
-	state = {lat: null, errMsg: null}
-
-	
-	componentDidMount() {
-		console.log('My component was rendered to the screen');
-	// Get user location, a built-in function for window
-	// first arg will be a callback function which gets called when userlocation is resolved,
-	// second arg is callback when it fails
-	window.navigator.geolocation.getCurrentPosition(
-		(position) => {
-			this.setState({ lat: position.coords.latitude})},
-		(err) => {
-			console.log(err)
-			this.setState({errMsg: err.message})		
-		} // if user denies to share location then it calls this function
-	);
-	}
-
-	componentDidUpdate() {
-		console.log('My component was just updated - it rerendered!')
-	}
-
-    renderContent(){
-		if (this.state.ereMsg && !this.state.lat){
-			return <div>Error: {this.state.errMsg}</div>
-		}	
-
-		if (!this.state.errMsg && this.state.lat) {
-			console.log("lat:", this.state.lat)
-			return <SeasonDisplay lat={this.state.lat}/>
-		}	
-
-		return <Loader message="Please accept request..."/>
-	}
-
-	render() {
-		return <div>{this.renderContent()} </div>
-	}
-
-
-}
-
-ReactDOM.render(
-	<App />, document.querySelector('#root')
-);
+ReactDOM.render(<App />, document.querySelector("#root"));
